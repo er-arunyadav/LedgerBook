@@ -1,80 +1,75 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Responsive Admin Dashboard Template">
+        <meta name="keywords" content="admin,dashboard">
+        <meta name="author" content="stacks">
+        <!-- Remove Tap Highlight on Windows Phone IE -->
+        <meta name="msapplication-tap-highlight" content="no"/>
+        <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        
+        <!-- Title -->
+        <title>LedgerBook|My Tech Table</title>
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+        <!-- Styles -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+        
+        <link href="{{asset('plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+        <link href="{{asset('plugins/font-awesome/css/all.min.css')}}" rel="stylesheet">
+        <link href="{{asset('plugins/waves/waves.min.css')}}" rel="stylesheet">
+        <link href="{{asset('plugins/nvd3/nv.d3.min.css')}}" rel="stylesheet">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+      
+        <!-- Theme Styles -->
+        <link href="{{asset('css/alpha.min.css')}}" rel="stylesheet">
+        <link href="{{asset('css/custom.css')}}" rel="stylesheet">
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+       
+    </head>
+    <body class="{{ (Route::current()->getName() == 'login') ? 'login-page sign-in loaded' : 'normal' }}">
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+        <div class="loader">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
             </div>
-        </nav>
+        </div>
 
-        <main class="py-4">
+        <div class="alpha-app">
+
+            @if (Auth::check())
+                @include('layouts.header')
+                @include('layouts.search')
+                @include('layouts.sidebar')
+            @endif
+           
             @yield('content')
-        </main>
-    </div>
-</body>
+
+            
+            
+            
+            
+        </div><!-- App Container -->
+        
+        <!-- Javascripts -->
+        <script src="{{asset('plugins/jquery/jquery-3.4.1.min.js')}}"></script>
+        <script src="{{asset('plugins/bootstrap/popper.min.js')}}"></script>
+        <script src="{{asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('plugins/waves/waves.min.js')}}"></script>
+        <script src="{{asset('plugins/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
+        <script src="{{asset('plugins/d3/d3.min.js')}}"></script>
+        <script src="{{asset('plugins/nvd3/nv.d3.min.js')}}"></script>
+        <script src="{{asset('plugins/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
+        <script src="{{asset('plugins/apexcharts/dist/apexcharts.min.js')}}"></script>
+        <script src="{{asset('plugins/flot/jquery.flot.min.js')}}"></script>
+        <script src="{{asset('plugins/flot/jquery.flot.time.min.js')}}"></script>
+        <script src="{{asset('plugins/flot/jquery.flot.symbol.min.js')}}"></script>
+        <script src="{{asset('plugins/flot/jquery.flot.resize.min.js')}}"></script>
+        <script src="{{asset('plugins/flot/jquery.flot.tooltip.min.js')}}"></script>
+        <script src="{{asset('js/alpha.min.js')}}"></script>
+        <script src="{{asset('js/pages/dashboard.js')}}"></script>
+    </body>
 </html>
