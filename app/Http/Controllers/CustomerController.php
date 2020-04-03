@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
+use Session;
+use App\Customer;
 class CustomerController extends Controller
 {
     /**
@@ -13,7 +15,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customers = Customer::orderBy('created_at','desc')->paginate(10);
+        return view('admin.customers.index')->with('customers',$customers);
     }
 
     /**
@@ -23,7 +26,8 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        
+        return view('admin.customers.add');
     }
 
     /**
@@ -33,8 +37,26 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $this->validate($request,[
+            'name' => 'required',
+            'email' => 'required|email:rfc,dns',
+            'mobile'=>'required|max:10',
+            'image' => 'image'
+        ]);
+
+       $filename = time().$request->image->getClientOriginalName(); 
+       $request->image->storeAs('images',$filename, 'public');
+
+       $customer = Customer::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
+            'address' => $request->address,
+            'profile_pic' => $filename
+       ]);
+       Session::flash('success','Customer Successfully Created');
+       return redirect()->back();
     }
 
     /**

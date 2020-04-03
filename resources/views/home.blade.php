@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
- <div class="page-content">
+
 
                 <div class="container-fluid">
                     <div class="row">
@@ -174,6 +174,5 @@
                         </div>
                     </div>
                 </div>
-                
-</div><!-- Page Content -->
+
 @endsection

@@ -17,8 +17,9 @@ class CreateCustomersTable extends Migration
             $table->increments('id');
             $table->string('name',120);
             $table->string('email');
-            $table->integer('mobile');
+            $table->string('mobile');
             $table->text('address');
+            $table->string('profile_pic');
             $table->timestamps();
         });
     }

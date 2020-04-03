@@ -45,9 +45,9 @@
                 @include('layouts.search')
                 @include('layouts.sidebar')
             @endif
-           
+           <div class="page-content"> 
             @yield('content')
-
+            </div>
             
             
             

@@ -22,7 +22,7 @@
                         <div class="sidebar-accordion-menu">
                             <ul class="sidebar-menu list-unstyled">
                                 <li>
-                                    <a href="index.html" class="waves-effect waves-grey active">
+                                    <a href="{{route('home')}}" class="waves-effect waves-grey active">
                                         <i class="material-icons">settings_input_svideo</i>Dashboard
                                     </a>
                                 </li>
@@ -31,8 +31,8 @@
                                         <i class="material-icons">apps</i>Customer<i class="material-icons sub-arrow">keyboard_arrow_right</i>
                                     </a>
                                     <ul class="accordion-submenu list-unstyled">
-                                        <li><a href="app-mailbox.html">View customer</a></li>
-                                        <li><a href="app-file-manager.html">Add customer</a></li>
+                                        <li><a href="{{route('customer')}}">View customer</a></li>
+                                        <li><a href="{{route('customer.create')}}">Add customer</a></li>
                                         
                                     </ul>
                                 </li>
