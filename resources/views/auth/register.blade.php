@@ -67,7 +67,7 @@
 
                         <div class="form-group">
                             
-                                <button type="submit" class="btn btn-text-secondary float-right m-r-sm waves-effect waves-light">
+                                <button type="submit" class="btn btn-primary float-right waves-effect waves-light">
                                     {{ __('Register') }}
                                 </button>
                             

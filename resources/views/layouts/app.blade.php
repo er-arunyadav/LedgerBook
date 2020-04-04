@@ -31,7 +31,7 @@
        
     </head>
     <body class="
-        @if(Route::current()->getName() == 'login')
+        @if(Route::current()->getName() == 'login' or Route::current()->getName() == 'password.request')
             login-page sign-in loaded
         @elseif(Route::current()->getName() == 'register')
             login-page sign-up loaded

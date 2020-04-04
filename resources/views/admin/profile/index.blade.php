@@ -33,12 +33,12 @@
                                         </div>
                                         <div class="form-group">
                                         	<label for="old_password">Old Password</label>
-                                        	<input class="form-control" id="form-control" name="old_password" id="old_password">
+                                        	<input type="password" class="form-control" id="form-control" name="old_password" id="old_password">
                                         </div>
 
                                         <div class="form-group">
                                         	<label for="new_password">New Password</label>
-                                        <input type="text" class="form-control" name="new_password">
+                                        <input type="password" class="form-control" name="new_password">
                                        
                                         </div>
                                         <div class="form-group">
