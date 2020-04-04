@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Session;
+use App\Customer;
+use App\Ledger;
 class LedgerController extends Controller
 {
     /**
@@ -13,7 +15,8 @@ class LedgerController extends Controller
      */
     public function index()
     {
-        //
+        $customers = Customer::all();
+        return view('admin.ledgers.index')->with('customers',$customers);
     }
 
     /**
@@ -34,7 +37,43 @@ class LedgerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'customer_id' => 'required',
+            'date' =>'required',
+            'particular'=>'required',
+           
+            'image'=>'image'
+        ]);
+
+        if (empty($request->credit)) {
+        $credit = 0;    
+        }else{
+            $credit = $request->credit;
+        }
+
+        if (empty($request->debit)) {
+        $debit = 0;    
+        }else{
+            $debit = $request->debit;
+        }
+
+        if($request->hasFile('image')){
+            $filename = time().$request->image->getClientOriginalName();
+            $request->image->storeAs('ledger',$filename,'public');
+        }else{
+            $filename = 'noimage.png';
+        }
+
+        $ledger = Ledger::create([
+            'customer_id' => $request->customer_id,
+            'date' =>$request->date,
+            'particular'=>$request->particular,
+            'credit'=>$credit,
+            'debit'=>$debit,
+            'image'=>$filename
+        ]);
+        Session::flash('success','Record Successfully created');
+        return redirect()->back();
     }
 
     /**
@@ -45,7 +84,31 @@ class LedgerController extends Controller
      */
     public function show($id)
     {
-        //
+        $customer = Customer::find($id);
+
+        $records = Ledger::where('customer_id',$id)->get();
+        $balance = $this->balance($records);
+        return view('admin.ledgers.details')
+        ->with('customer',$customer)
+        ->with('balance',$balance)
+        ->with('records',$records);
+    }
+
+    public function balance($records){
+
+        $credit =0;
+        $debit = 0;
+        $balance=0;
+
+        foreach($records as $record){
+            $credit += $record->credit;
+            $debit += $record->debit;
+        }
+
+        $balance = $credit - $debit;
+        return $balance;
+
+
     }
 
     /**

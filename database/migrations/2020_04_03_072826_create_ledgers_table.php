@@ -18,8 +18,8 @@ class CreateLedgersTable extends Migration
             $table->bigInteger('customer_id');
             $table->string('date');
             $table->string('particular');
-            $table->Integer('credit')->default(0);
-            $table->Integer('debit')->default(0);
+            $table->Integer('credit')->nullable()->default(0);
+            $table->Integer('debit')->nullable()->default(0);
             $table->string('image')->nullable();
             $table->timestamps();
         });

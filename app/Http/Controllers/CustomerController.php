@@ -78,7 +78,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer = Customer::find($id);
+        return view('admin.customers.edit')->with('customer',$customer);
     }
 
     /**
@@ -90,7 +91,30 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $customer = Customer::find($id);
+        $this->validate($request,[
+            'name' => 'required',
+            'email' => 'required|email:rfc,dns',
+            'mobile'=>'required|max:10',
+            'image' => 'image'
+        ]);
+
+        if($request->hasFile('image')){
+            $filename = time().$request->image->getClientOriginalName(); 
+            $request->image->storeAs('images',$filename, 'public');
+             $customer->profile_pic = $filename;
+        }
+
+        $customer->name = $request->name;
+        $customer->email = $request->email;
+        $customer->mobile = $request->mobile;
+        $customer->address = $request->address;
+        $customer->save();
+       
+       Session::flash('success','Customer updated Successfully');
+       return redirect()->back();
+
+
     }
 
     /**
@@ -101,6 +125,9 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+         $customer = Customer::find($id);
+         $customer->delete();
+         Session::flash('success','Customer deleted Successfully');
+         return redirect()->back();
     }
 }

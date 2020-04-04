@@ -27,10 +27,18 @@
         <!-- Theme Styles -->
         <link href="{{asset('css/alpha.min.css')}}" rel="stylesheet">
         <link href="{{asset('css/custom.css')}}" rel="stylesheet">
-
+        <link href="{{asset('css/jquery-ui.css')}}" rel="stylesheet">
        
     </head>
-    <body class="{{ (Route::current()->getName() == 'login') ? 'login-page sign-in loaded' : 'normal' }}">
+    <body class="
+        @if(Route::current()->getName() == 'login')
+            login-page sign-in loaded
+        @elseif(Route::current()->getName() == 'register')
+            login-page sign-up loaded
+        @else
+
+        @endif
+        ">
 
         <div class="loader">
             <div class="spinner-border text-primary" role="status">
@@ -44,10 +52,15 @@
                 @include('layouts.header')
                 @include('layouts.search')
                 @include('layouts.sidebar')
+                <div class="page-content"> 
+                    @yield('content')
+                </div>
+            @else
+                @yield('auth')
             @endif
-           <div class="page-content"> 
-            @yield('content')
-            </div>
+
+           
+
             
             
             
@@ -56,6 +69,7 @@
         
         <!-- Javascripts -->
         <script src="{{asset('plugins/jquery/jquery-3.4.1.min.js')}}"></script>
+        <script src="{{asset('plugins/jquery/jquery-ui.js')}}"></script>
         <script src="{{asset('plugins/bootstrap/popper.min.js')}}"></script>
         <script src="{{asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('plugins/waves/waves.min.js')}}"></script>
@@ -71,5 +85,6 @@
         <script src="{{asset('plugins/flot/jquery.flot.tooltip.min.js')}}"></script>
         <script src="{{asset('js/alpha.min.js')}}"></script>
         <script src="{{asset('js/pages/dashboard.js')}}"></script>
+        @include('layouts.js')
     </body>
 </html>

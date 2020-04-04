@@ -11,13 +11,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//*** Customer Route start ***
+
 Route::get('/customer/create',[
 
 		'uses' => 'customercontroller@create',
 		'as' => 'customer.create'
 
 ]);
-
 Route::get('/customer',[
 
 		'uses' => 'customercontroller@index',
@@ -29,3 +30,45 @@ Route::post('/customer/store',[
 	'uses' => 'customercontroller@store',
 	'as' => 'customer.store'
 ]);
+
+Route::get('customer/edit/{id}',[
+	'uses' => 'customercontroller@edit',
+	'as' => 'customer.edit'
+]);
+
+Route::get('customer/delete/{id}',[
+	'uses' => 'customercontroller@destroy',
+	'as' => 'customer.delete'
+]);
+
+Route::post('customer/update/{id}',[
+	'uses' => 'customercontroller@update',
+	'as' => 'customer.update'
+]);
+
+// **** Customer Route End ****
+
+
+// *** Ledger Route Start ***
+
+Route::get('ledger',[
+	'uses' => 'ledgercontroller@index',
+	'as' => 'ledger'
+]);
+
+Route::get('ledger/details/{id}',[
+	'uses' => 'ledgercontroller@show',
+	'as' => 'ledger.details'
+]);
+
+Route::post('ledger/store',[
+	'uses' => 'ledgercontroller@store',
+	'as' => 'ledger.store'
+]);
+// **** Ledger Route End ****
+
+
+
+
+
+

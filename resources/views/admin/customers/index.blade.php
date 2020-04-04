@@ -2,6 +2,8 @@
 
 
 @section('content')
+@include('layouts.alerts')
+<br>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12">
@@ -54,16 +56,16 @@
                                                   			{{$customer->address}}
                                                   		</td>
                                                   		<td>
-                                                  			<a href="" class="btn btn-success">Edit
+                                                  			<a href="{{route('customer.edit',['id'=>$customer->id])}}" class="btn btn-success">Edit
                                                   			</a>
                                                         </td>
                                                         <td>
-                                                  			<a href="" class="btn btn-danger">Delete</a>
+                                                  			<a href="{{route('customer.delete',['id'=>$customer->id])}}" class="btn btn-danger">Delete</a>
                                                   		</td>
                                                   	</tr>
                                                   	@endforeach
                                                   @else
-
+                                                  <tr><td>No data found!</td></tr>
                                                   @endif
                                                 </tbody>
                                             </table>

@@ -16,7 +16,14 @@
                             <ul class="sidebar-menu list-unstyled">
                                 <li><a href="#" class="waves-effect waves-grey"><i class="material-icons">inbox</i>Profile</a></li>
 
-                                <li><a href="#" class="waves-effect waves-grey"><i class="material-icons">exit_to_app</i>Sign Out</a></li>
+                                <li><a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();" class="waves-effect waves-grey"><i class="material-icons">exit_to_app</i>{{ __('Logout') }}</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>  
+
+                                </li>
                             </ul>
                         </div>
                         <div class="sidebar-accordion-menu">
@@ -38,7 +45,7 @@
                                 </li>
 
                                 <li>
-                                    <a href="charts.html" class="waves-effect waves-grey">
+                                    <a href="{{route('ledger')}}" class="waves-effect waves-grey">
                                         <i class="material-icons">trending_up</i>Ledger
                                     </a>
                                 </li>
