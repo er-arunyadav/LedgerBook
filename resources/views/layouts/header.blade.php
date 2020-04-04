@@ -94,9 +94,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link right-sidebar-link" href="#"><i class="material-icons">more_vert</i></a>
-                            </li>
+                          
                         </ul>
                     </div>
                 </nav>
