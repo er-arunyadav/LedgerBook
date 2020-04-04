@@ -42,14 +42,16 @@
 
             .content {
                 text-align: center;
+                color: #fff;
             }
 
             .title {
+                color: #fff;
                 font-size: 84px;
             }
 
             .links > a {
-                color: #636b6f;
+                color: #fff;
                 padding: 0 25px;
                 font-size: 13px;
                 font-weight: 600;
@@ -61,16 +63,22 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            .main-page{
+                background-image: url("{{asset('images/mountains3.png')}}");
+                
+                background-size: cover;
+             
+            }
         </style>
     </head>
-    <body>
+    <body class="main-page">
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('login') }}" class="">Login</a>
 
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}">Register</a>
@@ -81,19 +89,12 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    LedgerBook
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                <p class="content">
+                    &copy;Arun Yadav
+                </p>
+               
             </div>
         </div>
     </body>
