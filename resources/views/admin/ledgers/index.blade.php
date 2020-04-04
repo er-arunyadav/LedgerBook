@@ -39,7 +39,13 @@
 				  	                                <img src="{{asset('storage/images/'.$customer->profile_pic)}}" class="card-img-top img-card" alt="user image">
                                 <div class="card-body">
                                   <h5 class="card-title">{{$customer->name}}</h5>
-                                   
+                                   <p>Balance: 
+
+                        @if(balance($customer->id) > 0)
+                        <strong class="text-success"> {{balance($customer->id)}} <i class="fas fa-rupee-sign"></i></span> </strong>
+                      @else
+                       <strong class="text-danger"> {{(-1)*balance($customer->id)}} <i class="fas fa-rupee-sign"></i></span> </strong>
+                      @endif</p>
                                     <a href="{{route('ledger.details',['id'=>$customer->id])}}" class="btn btn-primary waves-effect waves-light">Go Ledger</a>
                                 </div>
              

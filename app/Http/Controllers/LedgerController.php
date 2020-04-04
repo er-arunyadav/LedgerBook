@@ -16,7 +16,13 @@ class LedgerController extends Controller
     public function index()
     {
         $customers = Customer::all();
-        return view('admin.ledgers.index')->with('customers',$customers);
+        $usersbalance = Ledger::balance($customers);
+        
+        $customers = Customer::all();
+        return view('admin.ledgers.index')
+               ->with('customers',$customers)
+                ->with('usersbalance',$usersbalance)
+               ;
     }
 
     /**
