@@ -24,9 +24,15 @@ class LedgerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function search(Request $request)
     {
-        //
+
+        $q = $request->f;
+        $customers = Customer::where('name','LIKE','%'.$q.'%')
+                     ->orWhere('email','LIKE','%'.$q.'%')->get();
+        
+         return view('admin.ledgers.index')
+                ->with('customers',$customers);
     }
 
     /**

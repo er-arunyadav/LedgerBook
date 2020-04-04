@@ -11,3 +11,8 @@
 		{{Session::get('success')}}
 	</div>
    @endif
+	@if(Session::has('danger'))
+	<div class="alert alert-danger alert-dismissible fade show text-white" role="alert">
+		{{Session::get('danger')}}
+	</div>
+   @endif

@@ -56,6 +56,11 @@ Route::get('ledger',[
 	'as' => 'ledger'
 ]);
 
+Route::post('ledger/search',[
+	'uses' => 'ledgercontroller@search',
+	'as' => 'ledger.search'
+]);
+
 Route::get('ledger/details/{id}',[
 	'uses' => 'ledgercontroller@show',
 	'as' => 'ledger.details'
@@ -72,3 +77,12 @@ Route::post('ledger/store',[
 
 
 
+Route::get('user/profile',[
+	'uses' => 'Auth\profilecontroller@index',
+	'as' => 'user.profile'
+]);
+
+Route::post('user/profile',[
+	'uses' => 'Auth\profilecontroller@store',
+	'as' => 'profile.store'
+]);

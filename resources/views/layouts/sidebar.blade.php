@@ -2,7 +2,7 @@
                 <div class="page-sidebar-inner">
                     <div class="page-sidebar-profile">
                         <div class="sidebar-profile-image">
-                            <img src="{{asset('images/avatars/avatar1.png')}}">
+                            <img src="{{asset('/storage/admin/'.Auth::user()->image)}}">
                         </div>
                         <div class="sidebar-profile-info">
                             <a href="javascript:void(0);" class="account-settings-link">
@@ -14,7 +14,7 @@
                     <div class="page-sidebar-menu">
                         <div class="page-sidebar-settings hidden">
                             <ul class="sidebar-menu list-unstyled">
-                                <li><a href="#" class="waves-effect waves-grey"><i class="material-icons">inbox</i>Profile</a></li>
+                                <li><a href="{{route('user.profile')}}" class="waves-effect waves-grey"><i class="material-icons">inbox</i>Profile</a></li>
 
                                 <li><a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
