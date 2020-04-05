@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Session;
+use Mail;
 use App\Customer;
 class CustomerController extends Controller
 {
@@ -55,6 +56,15 @@ class CustomerController extends Controller
             'address' => $request->address,
             'profile_pic' => $filename
        ]);
+
+       $customerdetails = array(
+            'name' => $request->name,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
+            'address' => $request->address,
+        );
+
+       Mail::to($request->email)->send(new \App\Mail\Customer($customerdetails));
        Session::flash('success','Customer Successfully Created');
        return redirect()->back();
     }
