@@ -33,6 +33,7 @@
           <div class="row">
           <div class="col-xl">
             <input type="hidden" name="customer_id" value="{{$customer->id}}">
+            <input type="hidden" name="customer_email" value="{{$customer->email}}">
             <div class="form-group">
               <label for="datepicker">Date</label>
               <input type="text" name="date" class="form-control" value="{{date('d/m/Y')}}" id="datepicker">
@@ -132,7 +133,7 @@
                                                  @endif
                                                 </tbody>
                                             </table>
-                                            
+
                                         </div>      
                                     </div>
                                 </div>

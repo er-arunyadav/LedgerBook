@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Session;
+use Mail;
 use App\Customer;
 use App\Ledger;
 class LedgerController extends Controller
@@ -53,9 +54,9 @@ class LedgerController extends Controller
             'customer_id' => 'required',
             'date' =>'required',
             'particular'=>'required',
-           
             'image'=>'image'
         ]);
+        $customer  = Customer::find($request->customer_id);
 
         if (empty($request->credit)) {
         $credit = 0;    
@@ -85,6 +86,14 @@ class LedgerController extends Controller
             'debit'=>$debit,
             'image'=>$filename
         ]);
+        $balance = balance($customer->id);
+        $amount = array(
+            'credit' => $credit,
+            'debit' => $debit,
+            'balance'=> $balance,
+            'particular' => $request->particular
+        );
+        Mail::to($request->customer_email)->send(new \App\Mail\Ledger($customer->name,$amount));
         Session::flash('success','Record Successfully created');
         return redirect()->back();
     }
