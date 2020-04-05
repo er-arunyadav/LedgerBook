@@ -18,7 +18,7 @@
                                         <div class="card-body">
                                             <h5 class="card-title">Credit</h5>
                                             <div class="info-card-text">
-                                                <h3>792.8 $</h3>
+                                                <h3>{{$credit}} <i class="fas fa-rupee-sign"></i></h3>
                                                 <span class="info-card-helper">This Month</span>
                                             </div>
                                             <div class="info-card-icon">
@@ -33,16 +33,15 @@
                                         <div class="card-body">
                                             <h5 class="card-title">Debit</h5>
                                             <div class="info-card-text">
-                                                <h3>460.9 K</h3>
+                                                <h3>{{$debit}} <i class="fas fa-rupee-sign"></i></h3>
                                                 <span class="info-card-helper">This Month</span>
                                             </div>
                                             <div class="info-card-icon">
                                                 <i class="material-icons-outlined">attach_money</i>
                                             </div>
                                         </div>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
+                                         <div id="sparkline-line"></div>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -52,14 +51,14 @@
                                         <div class="card-body">
                                             <h5 class="card-title">Customer</h5>
                                             <div class="info-card-text">
-                                                <h3>570.4 K</h3>
+                                                <h3>{{$customerCount}}</h3>
                                                 <span class="info-card-helper">This Week</span>
                                             </div>
                                             <div class="info-card-icon">
                                                 <i class="material-icons">trending_up</i>
                                             </div>
                                         </div>
-                                        <div id="sparkline-line"></div>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
@@ -67,14 +66,15 @@
                                         <div class="card-body">
                                             <h5 class="card-title">Profit</h5>
                                             <div class="info-card-text">
-                                                <h3>142,739</h3>
-                                                <span class="info-card-helper">This Month</span>
+                                                <h3>{{$weeklyProfit}} <i class="fas fa-rupee-sign"></i>
+                                                </h3>
+                                                <span class="info-card-helper">This Week</span>
                                             </div>
                                             <div class="info-card-icon">
                                                 <i class="material-icons">attach_money</i>
                                             </div>
                                         </div>
-                                        <div id="sparkline-bar-2"></div>
+                                       
                                     </div>
                                 </div>
                             </div>

@@ -75,10 +75,11 @@ class LedgerController extends Controller
         }else{
             $filename = 'noimage.png';
         }
-
+        $orgDate = $request->date;
+        $date = date("Y-d-m", strtotime($orgDate));
         $ledger = Ledger::create([
             'customer_id' => $request->customer_id,
-            'date' =>$request->date,
+            'date' =>$date,
             'particular'=>$request->particular,
             'credit'=>$credit,
             'debit'=>$debit,

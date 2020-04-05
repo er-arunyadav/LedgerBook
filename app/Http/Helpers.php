@@ -1,5 +1,10 @@
 <?php 
+
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use App\Ledger;
+
+use App\Customer;
 
  function balance($id)
 {
@@ -16,3 +21,58 @@ use App\Ledger;
         $balance = $credit - $debit;
         return $balance;	
 }
+
+function finance(){
+
+     $data = DB::table("ledgers")
+                        ->whereYear('date', Carbon::now()->year)
+                        ->whereMonth('date', Carbon::now()->month);
+
+            $credit = $data->sum('credit');
+            $debit = $data->sum('debit');
+
+            $weekStartDate = Carbon::now()->startOfWeek()->format('Y-m-d');
+            $weekEndDate = Carbon::now()->endOfWeek()->format('Y-m-d');
+
+            $weeklyData = Ledger::whereBetween('date',[$weekStartDate,$weekEndDate]);
+
+            $weeklyCredit = $weeklyData->sum('credit');
+            $weeklyDebit = $weeklyData->sum('debit');
+
+            $weeklyProfit = $weeklyCredit - $weeklyDebit;
+
+        return array(
+            'credit' => $credit,
+            'debit' => $debit,
+            'weeklyProfit' =>$weeklyProfit
+        );
+}
+
+
+function credit (){
+    $data = DB::table('ledgers')->select('credit')
+                ->whereYear('date', Carbon::now()->year)
+                ->whereMonth('date', Carbon::now()->month)
+                ->get();
+                $credit = array();
+                foreach ($data as $result) {
+                   $credit[] = $result->credit;
+                }
+    
+    return json_encode($credit);
+}
+
+function debit (){
+    $data = DB::table('ledgers')->select('debit')
+                ->whereYear('date', Carbon::now()->year)
+                ->whereMonth('date', Carbon::now()->month)
+                ->get();
+                $debit = array();
+                foreach ($data as $result) {
+                   $debit[] = $result->debit;
+                }
+    
+    return json_encode($debit);
+}
+
+

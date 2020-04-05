@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use App\Ledger;
+use App\Customer;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +26,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $data = finance();
+        $credit = $data['credit'];
+        $debit = $data['debit'];
+        $weeklyProfit = $data['weeklyProfit'];
+        $customerCount = Customer::count();
+        
+  
+      
+        return view('home', [
+            'credit' => $credit,
+            'debit' =>$debit,
+            'weeklyProfit'=>$weeklyProfit,
+            'customerCount'=>$customerCount
+        ]);
     }
 }
