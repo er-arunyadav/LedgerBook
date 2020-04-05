@@ -70,13 +70,10 @@ Route::post('ledger/store',[
 	'uses' => 'ledgercontroller@store',
 	'as' => 'ledger.store'
 ]);
+
 // **** Ledger Route End ****
 
-
-
-
-
-
+// **** Profile Route Start ****
 Route::get('user/profile',[
 	'uses' => 'Auth\profilecontroller@index',
 	'as' => 'user.profile'
@@ -86,3 +83,24 @@ Route::post('user/profile',[
 	'uses' => 'Auth\profilecontroller@store',
 	'as' => 'profile.store'
 ]);
+
+// **** Profile Route End ****
+
+// **** Report Route Start ****
+
+Route::get('report',[
+	'uses' => 'reportcontroller@index',
+	'as' => 'report'
+]);
+
+Route::post('report/search',[
+	'uses' => 'reportcontroller@search',
+	'as' => 'report.search'
+]);
+
+Route::get('report/pdf/{id}/{date_to}/{date_from}',[
+	'uses' => 'reportcontroller@pdf',
+	'as' => 'report.pdf'
+]);
+
+// **** Report Route End ****

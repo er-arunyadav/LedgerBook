@@ -6,6 +6,12 @@
     });
   } );
 
+  $( function() {
+    $( ".date" ).datepicker({
+        changeMonth: true,
+        changeYear: true,
+    });
+  } );
 
 $(document).ready(function() {
 

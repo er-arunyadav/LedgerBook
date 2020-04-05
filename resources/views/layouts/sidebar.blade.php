@@ -52,7 +52,7 @@
 
                            
                                 <li>
-                                    <a href="forms.html" class="waves-effect waves-grey">
+                                    <a href="{{route('report')}}" class="waves-effect waves-grey">
                                         <i class="material-icons">mode_edit</i>Report
                                     </a>
                                 </li>

@@ -22,6 +22,22 @@ use App\Customer;
         return $balance;	
 }
 
+
+function balanceSearch($result){
+        $credit =0;
+        $debit = 0;
+        $balance=0;
+        
+
+        foreach($result as $record){
+            $credit += $record->credit;
+            $debit += $record->debit;
+        }
+
+        $balance = $credit - $debit;
+        return $balance;
+}
+
 function finance(){
 
      $data = DB::table("ledgers")
