@@ -2,6 +2,7 @@
 	namespace App\Http\Controllers\Auth;
 	use App\Http\Controllers\Controller;
 	use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\Hash;
 	use App\User;
 	use Session;
 class ProfileController extends Controller
@@ -25,27 +26,30 @@ class ProfileController extends Controller
     	
     	$user = User::find($id);
 
-		if (password_verify($check_password, $user->password)) {
-		    
+        if (Hash::check($request->old_password, $user->password)) { 
 
-		if($request->hasFile('image')){
+        if($request->hasFile('image')){
             $filename = time().$request->image->getClientOriginalName(); 
             $request->image->storeAs('admin',$filename, 'public');
-             $user->image = $filename;
+             
         }
-    	$user->name = $request->name;
-    	$user->email = $request->email;
-    	$user->password = bcrypt($request->password);
+        
+           $user->fill([
+            'password' => Hash::make($request->new_password),
+            'image' => $filename,
+            'name'=> $request->name,
+            'email' => $request->email
+            ])->save();
 
- 		$user->save();
-       
-       Session::flash('success','Profile updated Successfully');
+        Session::flash('success','Profile updated Successfully');
        return redirect()->back();
 
-		}else{
-			Session::flash('danger','old password is incorrect');
-         	return redirect()->back();
-		}
-    	
+} else {
+   Session::flash('danger','old password is incorrect');
+            return redirect()->back();
+}
+
+
+		
     }
 }
