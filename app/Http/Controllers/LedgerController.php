@@ -99,7 +99,7 @@ class LedgerController extends Controller
     {
         $customer = Customer::find($id);
 
-        $records = Ledger::where('customer_id',$id)->get();
+        $records = Ledger::orderBy('created_at','desc')->where('customer_id',$id)->paginate(10);
         $balance = $this->balance($records);
         return view('admin.ledgers.details')
         ->with('customer',$customer)

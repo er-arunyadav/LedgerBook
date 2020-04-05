@@ -12,7 +12,7 @@
                     <span>{{$customer->name}}</span>
                     <span class="float-right">Balance: 
                       @if($balance > 0)
-                        <strong class="text-success"> {{$balance}} <i class="fas fa-rupee-sign"></i></span> </strong>
+                        <strong class="text-success"> {{balance($customer->id)}} <i class="fas fa-rupee-sign"></i></span> </strong>
                       @else
                        <strong class="text-danger"> {{(-1)*$balance}} <i class="fas fa-rupee-sign"></i></span> </strong>
                       @endif
@@ -132,6 +132,7 @@
                                                  @endif
                                                 </tbody>
                                             </table>
+                                            
                                         </div>      
                                     </div>
                                 </div>
@@ -140,7 +141,12 @@
 			</div>
 		</div>
 
-   
+     <div class="row">
+      <div class="col-12">
+        {{$records->links('vendor.pagination.pagination')}}
+      </div>
+             
+    </div>
 	</div>
 
 @endsection
